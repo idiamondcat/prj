@@ -1,0 +1,18 @@
+<div class="menu">
+    <nav class="menu__nav">
+        <ul class="menu__list">
+            <li class="menu__item">
+                <a class="menu__link" [routerLink]="['/']" [routerLinkActive]="['menu__link--active']">
+                    <mat-icon class="menu__icon">format_list_bulleted</mat-icon>
+                    <span class="menu__text">Список аккаунтов</span>
+                </a>
+            </li>
+            <li class="menu__item">
+                <a class="menu__link menu__link--disabled" routerLink="">
+                    <mat-icon class="menu__icon">add</mat-icon>
+                    <span class="menu__text">Добавить аккаунт</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

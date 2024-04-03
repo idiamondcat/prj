@@ -1,0 +1,33 @@
+<main class="account">
+    <div class="container account__container">
+        <div class="account__info">
+            <div class="account__wrapper">
+                <div class="account__icon-wrapper">
+                    <mat-icon>person_outline</mat-icon>
+                </div>
+                <h1 class="title account__id">{{id}}</h1>
+            </div>
+        </div>
+        <section class="account__publications">
+            <h2 class="account__subtitle">Публикации</h2>
+            <ul>
+                <li *ngFor="let item of publications">
+                    <div class="publication">
+                        <div class="publication__img-wrapper">
+                            <img class="publication__img" src="assets/images/sander-traa-s_NNrT4DRnA-unsplash.jpg" alt="">
+                        </div>
+                        <div class="publication__info">
+                            <p class="publication__info-wrapper">
+                                <span class="publication__name">{{item.publication_id}}</span>
+                                <span class="publication__date">{{item.datetime | date : 'd MMMM y hh:mm' : '-4' : 'ru'}}</span>
+                            </p>
+                            <button class="publication__date-btn" (click)="openModal(item)" title="Изменить дату и время">
+                                <mat-icon class="publication__icon">edit_calendar</mat-icon>
+                            </button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </div>
+</main>
