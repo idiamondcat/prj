@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LoginService } from '../../../login/login.service';
 
 @Component({
   selector: 'app-shell',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
   templateUrl: './shell.component.html',
   styleUrl: './shell.component.scss'
 })
-export class ShellComponent {}
+export class ShellComponent {
+  loginService = inject(LoginService);
+}

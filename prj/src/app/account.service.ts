@@ -1,6 +1,6 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, map, mergeMap, of } from 'rxjs';
+import { Observable, catchError, map, of } from 'rxjs';
 import { IAccount, IPublication } from './models';
 
 @Injectable({
@@ -10,23 +10,19 @@ export class AccountService {
 
   constructor(private http: HttpClient) { }
 
-  // isLogin(): Observable<boolean> {
-  //   return this.http.get('check_password').pipe(
-  //     map(res => {
-  //       if (document.cookie)
-  //         return true;
-  //       else
-  //         return false;
-  //     }),
-  //     catchError((err) => {
-  //       console.log(err);
-  //       return of(err);
-  //     })
-  //   )
-  // }
+  login(password: string) {
+    const options  = { withCredentials: true };
+    return this.http.get(`check_password/${password}`).pipe(
+      map(res => res),
+      catchError((err) => {
+        console.log(err);
+        return of(err);
+      })
+    )
+  }
 
   getAccounts(): Observable<IAccount[]> {
-    return this.http.get<IAccount[]>('accounts/').pipe(
+    return this.http.get<IAccount[]>('accounts/', { withCredentials: true }).pipe(
       map((res) =>  res),
       catchError((err) => {
         console.log(err);

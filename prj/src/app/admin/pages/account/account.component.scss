@@ -1,17 +1,17 @@
 .account {
     &__info {
         width: 100%;
-        margin-bottom: 32px;
+        margin-bottom: 2rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         background-color: #57A09F;
-        padding: 20px 40px;
+        padding: 1.25rem 2.5rem;
     }
     &__wrapper {
         display: flex;
         align-items: baseline;
-        column-gap: 20px;
+        column-gap: 1.25rem;
     }
     &__icon-wrapper {
         width: 80px;
@@ -27,8 +27,7 @@
     }
     &__subtitle {
         text-decoration: underline;
-        margin-bottom: 20px;
-        // border-bottom: 1px solid #252525;
+        margin-bottom: 1.25rem;
     }
 }
 .publication {
@@ -36,15 +35,12 @@
     max-width: 300px;
     height: 300px;
     overflow: hidden;
-    // &__img-wrapper {
-    //     max-width: 300px;
-    // }
     &__img {
         filter: brightness(50%);
     }
     &__info {
         width: 100%;
-        padding: 16px 18px;
+        padding: 1rem 1.125rem;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -56,26 +52,26 @@
     &__info-wrapper {
         display: flex;
         flex-direction: column;
-        row-gap: 16px;
+        row-gap: 1rem;
     }
     &__name {
         font: {
-            size: 24px;
+            size: 1.5rem;
             weight: 500;
         }
     }
     &__date {
-        line-height: 24px;
+        line-height: 1.5rem;
     }
     &__date-btn {
         cursor: pointer;
-        padding: 0 6px;
+        padding: 0 0.375rem;
         background-color: transparent;
         outline: none;
         border: none;
     }
     &__icon {
         color: #ffffff;
-        font-size: 26px;
+        font-size: 1.625rem;
     }
 }

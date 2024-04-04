@@ -7,6 +7,20 @@
     left: 0;
     background-color: #ffffff;
     border: 1px solid #e1e1e1;
+    &__btn-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 2rem;
+    }
+    &__logout-btn {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+        border: none;
+        outline: none;
+        background-color: transparent;
+    }
     &__list {
         display: flex;
         flex-direction: column;

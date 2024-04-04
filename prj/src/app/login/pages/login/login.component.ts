@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { checkRegexp } from 'src/app/regexp.validator';
+import { checkRegexp } from '../../../regexp.validator';
 import { LoginService } from '../../login.service';
+import { AccountService } from '../../../account.service';
 
 @Component({
   selector: 'app-login',
@@ -17,16 +18,20 @@ export class LoginComponent {
     password: ['', [Validators.required, checkRegexp]]
   })
 
-  constructor(private builder: FormBuilder, private router: Router, private loginService: LoginService) {}
+  constructor(private builder: FormBuilder, private router: Router, private accountService: AccountService, private loginService: LoginService) {}
 
   get password() {
     return this.loginForm.get('password');
   }
 
   login() {
-    const token = 'GfhfkYGhjfh46y4jvdfkjgkjHHNJ44fks9dkkDGN';
-    localStorage.setItem('token', token);
-    this.loginService.isLogin.next(true);
-    this.router.navigate(['/']);
+    const password = this.loginForm.getRawValue().password;
+    if (password) {
+      this.accountService.login(password).subscribe(res => {
+        console.log(res);
+        this.loginService.isLogin.set(true);
+        this.router.navigate(['/']);
+      })
+    }
   }
 }
