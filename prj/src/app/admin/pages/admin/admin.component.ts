@@ -21,7 +21,6 @@ export class AdminComponent implements OnInit {
     .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe({
       next: (response) => {
-        console.log(response);
         this.accounts = response;
       },
       error: (err) => {

@@ -31,7 +31,6 @@ export class LoginComponent {
     if (password) {
       this.accountService.login(password).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (response) => {
-          console.log(document.cookie);
           this.loginService.isLogin.set(true);
           this.router.navigate(['/']);
         },
