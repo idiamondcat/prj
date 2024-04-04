@@ -1,8 +1,9 @@
 import { Component, DestroyRef, OnInit, inject } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AccountService } from '../../../account.service';
-import { IAccount } from '../../../models';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { LoginService } from 'src/app/login/login.service';
 
 @Component({
   selector: 'app-admin',
@@ -12,14 +13,22 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './admin.component.scss'
 })
 export class AdminComponent implements OnInit {
-  accounts: IAccount[] = [];
+  accounts: string[] = [];
   destroyRef = inject(DestroyRef);
-  constructor(private accountService: AccountService, public dialog: MatDialog) {}
+  constructor(private accountService: AccountService, public dialog: MatDialog, private router: Router, private loginService: LoginService) {}
   ngOnInit(): void {
     this.accountService.getAccounts()
     .pipe(takeUntilDestroyed(this.destroyRef))
-    .subscribe(res => {
-      this.accounts = res;
+    .subscribe({
+      next: (response) => {
+        console.log(response);
+        this.accounts = response;
+      },
+      error: (err) => {
+        console.log('Error:' + err);
+        this.loginService.isLogin.set(false);
+        this.router.navigate(['/login']);
+      }
     })
   }
 }

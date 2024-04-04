@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { checkRegexp } from '../../../regexp.validator';
 import { LoginService } from '../../login.service';
 import { AccountService } from '../../../account.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { AccountService } from '../../../account.service';
 })
 export class LoginComponent {
   hide: boolean = true;
+  destroyRef = inject(DestroyRef);
   loginForm = this.builder.group({
     password: ['', [Validators.required, checkRegexp]]
   })
@@ -27,10 +29,17 @@ export class LoginComponent {
   login() {
     const password = this.loginForm.getRawValue().password;
     if (password) {
-      this.accountService.login(password).subscribe(res => {
-        console.log(res);
-        this.loginService.isLogin.set(true);
-        this.router.navigate(['/']);
+      this.accountService.login(password).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+        next: (response) => {
+          console.log(document.cookie);
+          this.loginService.isLogin.set(true);
+          this.router.navigate(['/']);
+        },
+        error: (err) => {
+          console.log(err);
+          this.loginService.isLogin.set(false);
+          this.router.navigate(['/login']);
+        }
       })
     }
   }

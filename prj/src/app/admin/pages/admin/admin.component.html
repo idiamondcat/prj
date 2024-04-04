@@ -10,9 +10,9 @@
                                 <mat-icon class="account__icon">person_outline</mat-icon>
                                 <span class="account__social account__social--pinterest"></span>
                             </div>
-                            <h2 class="account__name">{{item.account_id}}</h2>
+                            <h2 class="account__name">{{item}}</h2>
                         </div>
-                        <a class="account__link" [routerLink]="['/details', item.account_id]">
+                        <a class="account__link" [routerLink]="['/details', item]">
                             <mat-icon class="account__link-icon">arrow_forward_ios</mat-icon>
                         </a>
                     </div>

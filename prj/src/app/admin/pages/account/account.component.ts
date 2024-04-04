@@ -14,14 +14,14 @@ import { IPublication } from '../../../models';
   styleUrl: './account.component.scss'
 })
 export class AccountComponent implements OnInit {
-  public id: number;
+  public id: string;
   public publications: IPublication[];
   destroyRef = inject(DestroyRef);
 
   constructor(private route: ActivatedRoute, public dialog: MatDialog, private accountService: AccountService) {}
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => (this.id = Number(params['id'])));
+    this.route.params.subscribe((params) => (this.id = params['id']));
     this.accountService.getPublications(this.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(res => {
       this.publications = res;
     })
