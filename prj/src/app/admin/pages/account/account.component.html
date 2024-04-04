@@ -19,7 +19,7 @@
                         <div class="publication__info">
                             <p class="publication__info-wrapper">
                                 <span class="publication__name">{{item.publication_id}}</span>
-                                <span class="publication__date" *ngIf="item.datetime">{{item.datetime | date : 'd MMMM y hh:mm' : '-4' : 'ru'}}</span>
+                                <span class="publication__date" *ngIf="item.datetime">{{item.datetime | date : 'd MMMM y hh:mm' : '' : 'ru'}}</span>
                             </p>
                             <button *ngIf="item.datetime" class="publication__date-btn" (click)="openModal(item)" title="Изменить дату и время">
                                 <mat-icon class="publication__icon">edit_calendar</mat-icon>

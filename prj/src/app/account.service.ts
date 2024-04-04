@@ -35,7 +35,7 @@ export class AccountService {
 
   getPublications(id: string): Observable<IPublication[]> {
     return this.http.get<IPublication[]>(`account/${id}/publications/`).pipe(
-      map((res) =>  res),
+      map((res) =>  res.sort((a, b) => new Date(a.datetime).valueOf() - new Date(b.datetime).valueOf())),
       catchError((err) => {
         return throwError(() => err);
       })
