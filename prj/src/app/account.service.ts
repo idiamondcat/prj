@@ -47,7 +47,10 @@ export class AccountService {
     .set('account_id', id)
     .set('publication_id', publication)
     .set('new_datetime', date);
-    return this.http.put<IAccount>(`account/${id}`, { params }).pipe(
+    const urlParams = new HttpParams()
+    .set('publication_id', publication)
+    .set('new_datetime', date);
+    return this.http.put<IAccount>(`account/${id}?${urlParams.toString()}`, { params }).pipe(
       map((res) =>  res),
       catchError((err) => {
         return throwError(() => err);

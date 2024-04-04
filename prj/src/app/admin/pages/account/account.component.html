@@ -10,7 +10,7 @@
         </div>
         <section class="account__publications">
             <h2 class="account__subtitle">Публикации</h2>
-            <ul>
+            <ul class="account__publications-list">
                 <li *ngFor="let item of publications">
                     <div class="publication">
                         <div class="publication__img-wrapper">
@@ -19,9 +19,9 @@
                         <div class="publication__info">
                             <p class="publication__info-wrapper">
                                 <span class="publication__name">{{item.publication_id}}</span>
-                                <span class="publication__date">{{item.datetime | date : 'd MMMM y hh:mm' : '-4' : 'ru'}}</span>
+                                <span class="publication__date" *ngIf="item.datetime">{{item.datetime | date : 'd MMMM y hh:mm' : '-4' : 'ru'}}</span>
                             </p>
-                            <button class="publication__date-btn" (click)="openModal(item)" title="Изменить дату и время">
+                            <button *ngIf="item.datetime" class="publication__date-btn" (click)="openModal(item)" title="Изменить дату и время">
                                 <mat-icon class="publication__icon">edit_calendar</mat-icon>
                             </button>
                         </div>
