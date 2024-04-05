@@ -2,7 +2,7 @@ import { Component, DestroyRef, EventEmitter, Inject, Output, inject } from '@an
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { IPublication } from '../../../models';
 import { AccountService } from '../../../account.service';
 import * as moment from 'moment';
@@ -30,6 +30,7 @@ export class ModalComponent {
   destroyRef = inject(DestroyRef);
   constructor(@Inject(MAT_DIALOG_DATA) public data: IPublication,
   @Inject(MAT_DATE_LOCALE) private _locale: string,
+  public dialogRef: MatDialogRef<ModalComponent>,
   private builder: FormBuilder,
   private accountService: AccountService,
   private snackBar: MatSnackBar,
@@ -62,7 +63,7 @@ export class ModalComponent {
     const newData = new Date(changedDate + ' ' + newTime).toISOString();
     this.accountService.changeDate(this.data.account_id, this.data.publication_id, newData).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (response) => {
-        console.log(response);
+        this.dialogRef.close();
         this.adminService.isUpdate.set(true);
         this.snackBar.open('Дата изменена', '', {
           duration: 3000,
@@ -71,6 +72,7 @@ export class ModalComponent {
       },
       error: (err) => {
         console.log('Error:' + err);
+        this.dialogRef.close();
         this.adminService.isUpdate.set(false);
         this.snackBar.open('Ошибка изменения даты', '', {
           duration: 3000,

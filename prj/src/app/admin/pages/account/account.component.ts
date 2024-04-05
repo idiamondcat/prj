@@ -28,17 +28,15 @@ export class AccountComponent implements OnInit {
     })
   }
 
-  // ngOnChanges(): void {
-  //   if (this.adminService.isUpdate() === true) {
-  //     this.getData();
-  //     this.adminService.isUpdate.set(false);
-  //   }
-  // }
-
   public openModal(publication: IPublication) {
     const dialogRef = this.dialog.open(ModalComponent, {
       width: '600px',
       data: publication,
+    }).afterClosed().pipe(takeUntilDestroyed(this.destroyRef)).subscribe((res) => {
+      if (this.adminService.isUpdate() === true) {
+        this.getData();
+        this.adminService.isUpdate.set(false);
+      }
     });
   }
 
